@@ -1,0 +1,2704 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Centro de Liderazgo STEC · Santo Tomás</title>
+  <meta name="description" content="Programas de liderazgo con estándar académico global y presencia en todo Chile. Formamos mandos medios que transforman equipos y producen resultados." />
+
+  <!-- Google Fonts: Playfair Display para titulares + Inter para UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════════════════
+       DESIGN TOKENS — SANTO TOMÁS BRAND
+    ═══════════════════════════════════════════ */
+    :root {
+      --st-green:       #284639;   /* Verde Corporativo — Pantone 3308 C */
+      --st-green-mid:   #3a6350;   /* Verde medio para hovers */
+      --st-green-vivid: #0db14b;   /* Verde Complementario — Pantone 361 C */
+      --st-green-vivid-dark: #0a8f3c;
+      --st-white:       #F6FAF7;   /* Blanco pastel base — todo el sitio */
+      --st-pastel:      #E8F2EC;   /* Pastel verde sage — fondo hero */
+      --st-off-white:   #EDF5F0;   /* Fondo sección alterna */
+      --st-gray-light:  #EBEBEA;
+      --st-gray-mid:    #9CA3AF;
+      --st-text:        #181C18;
+      --st-text-soft:   #4B5563;
+      --st-border:      rgba(40, 70, 57, 0.14);
+
+      /* Tipografías */
+      --font-title:  'Playfair Display', Georgia, 'Times New Roman', serif;
+      --font-body:   'Inter', Arial, Helvetica, sans-serif;
+
+      /* Layout */
+      --max-w:       1140px;
+      --section-py:  96px;
+      --radius:      10px;
+    }
+
+    /* ═══════════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--st-text);
+      background: var(--st-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* Fade-up animation */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ═══════════════════════════════════════════
+       NAVIGATION — blanco con borde verde
+    ═══════════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--st-white);
+      border-bottom: 2px solid var(--st-green);
+      transition: box-shadow 0.3s;
+    }
+
+    nav.scrolled {
+      box-shadow: 0 2px 24px rgba(40,70,57,0.12);
+    }
+
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 40px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-brand-line {
+      width: 3px;
+      height: 36px;
+      background: var(--st-green-vivid);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .nav-brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .nav-brand-text strong {
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--st-green);
+      letter-spacing: 0.01em;
+    }
+
+    .nav-brand-text span {
+      font-size: 0.68rem;
+      color: var(--st-text-soft);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-family: var(--font-body);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--st-text-soft);
+      padding: 7px 14px;
+      border-radius: 6px;
+      letter-spacing: 0.01em;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--st-green);
+      background: rgba(40,70,57,0.06);
+    }
+
+    .nav-cta {
+      background: var(--st-green) !important;
+      color: white !important;
+      padding: 9px 20px !important;
+      border-radius: 7px !important;
+      font-weight: 700 !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--st-green-mid) !important; }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--st-green);
+      border-radius: 2px;
+    }
+
+    /* ═══════════════════════════════════════════
+       HERO — fondo blanco, elegante, aireado
+    ═══════════════════════════════════════════ */
+    .hero {
+      background: var(--st-pastel);
+      padding-top: 68px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(40,70,57,0.1);
+    }
+
+    /* Mancha verde suave en esquina */
+    .hero-blob {
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(40,70,57,0.055) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* Línea decorativa vertical */
+    .hero-accent-line {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, var(--st-green-vivid), transparent);
+      opacity: 0.6;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 96px 40px 88px;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(40,70,57,0.07);
+      border: 1px solid rgba(40,70,57,0.18);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--st-green);
+      margin-bottom: 28px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--st-green-vivid);
+      flex-shrink: 0;
+    }
+
+    .hero-headline {
+      font-family: var(--font-title);
+      font-weight: 900;
+      font-size: clamp(2.6rem, 4.8vw, 4rem);
+      line-height: 1.1;
+      color: var(--st-green);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--st-green-vivid);
+    }
+
+    /* Línea decorativa bajo el titular */
+    .hero-rule {
+      width: 56px;
+      height: 3px;
+      background: var(--st-green-vivid);
+      border-radius: 2px;
+      margin: 22px 0 28px;
+    }
+
+    .hero-sub {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      color: var(--st-text-soft);
+      max-width: 520px;
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+
+    .hero-sub strong {
+      color: var(--st-text);
+      font-weight: 700;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--st-green);
+      color: white;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 14px 26px;
+      border-radius: 7px;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: var(--st-green-mid);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--st-green);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 14px 26px;
+      border-radius: 7px;
+      border: 1.5px solid var(--st-green);
+      transition: background 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(40,70,57,0.06);
+    }
+
+    /* Card lateral — credenciales */
+    .hero-card {
+      background: #F0F7F3;
+      border: 1px solid rgba(40,70,57,0.12);
+      border-top: 3px solid var(--st-green);
+      border-radius: 12px;
+      padding: 32px 28px;
+      margin-top: 16px;
+    }
+
+    .hero-card-title {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--st-green);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-card-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--st-gray-light);
+    }
+
+    .hero-card-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .hero-stat {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--st-gray-light);
+    }
+
+    .hero-stat:last-child { border-bottom: none; }
+
+    .hero-stat-num {
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: 2rem;
+      line-height: 1;
+      color: var(--st-green);
+      min-width: 60px;
+    }
+
+    .hero-stat-desc {
+      font-family: var(--font-body);
+      font-size: 0.83rem;
+      color: var(--st-text-soft);
+      line-height: 1.45;
+    }
+
+    .hero-card-cert {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--st-gray-light);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .cert-tag {
+      background: var(--st-green);
+      color: white;
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .cert-tag.light {
+      background: transparent;
+      color: var(--st-green);
+      border: 1px solid rgba(40,70,57,0.3);
+    }
+
+    /* ═══════════════════════════════════════════
+       STATS STRIP — verde vivo
+    ═══════════════════════════════════════════ */
+    .stats-strip {
+      background: var(--st-green);
+      padding: 32px 40px;
+    }
+
+    .stats-strip-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .strip-stat {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .strip-stat-num {
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: 2rem;
+      line-height: 1;
+      color: white;
+    }
+
+    .strip-stat-text {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.4;
+      max-width: 110px;
+    }
+
+    .strip-divider {
+      width: 1px;
+      height: 36px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* ═══════════════════════════════════════════
+       SECTION SHARED HELPERS
+    ═══════════════════════════════════════════ */
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--st-green-vivid);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+      color: var(--st-green);
+      line-height: 1.15;
+      margin-bottom: 0;
+    }
+
+    /* ═══════════════════════════════════════════
+       SECCIÓN 2 — EL DESAFÍO
+    ═══════════════════════════════════════════ */
+    .challenge-section {
+      background: var(--st-white);
+      padding: var(--section-py) 0;
+    }
+
+    .challenge-top {
+      margin-bottom: 56px;
+    }
+
+    .challenge-top-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+      margin-top: 4px;
+    }
+
+    .challenge-intro {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--st-text-soft);
+      line-height: 1.8;
+      padding-top: 8px;
+    }
+
+    .challenge-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .challenge-card {
+      background: var(--st-pastel);
+      border-radius: 12px;
+      padding: 28px 24px;
+      border: 1px solid rgba(40,70,57,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .challenge-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(40,70,57,0.1);
+    }
+
+    .challenge-icon {
+      font-size: 1.6rem;
+      margin-bottom: 14px;
+      line-height: 1;
+    }
+
+    .challenge-card h3 {
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--st-green);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .challenge-card p {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--st-text-soft);
+      line-height: 1.65;
+    }
+
+    .challenge-card--highlight {
+      background: var(--st-green);
+      border-color: transparent;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .challenge-highlight-text p {
+      font-family: var(--font-title);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.6;
+    }
+
+    .btn-outline-green {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--st-green-vivid);
+      border: 1.5px solid rgba(13,177,75,0.5);
+      border-radius: 7px;
+      padding: 10px 18px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .btn-outline-green:hover {
+      background: rgba(13,177,75,0.12);
+      border-color: var(--st-green-vivid);
+    }
+
+    @media (max-width: 900px) {
+      .challenge-top-grid { grid-template-columns: 1fr; gap: 16px; }
+      .challenge-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .challenge-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ═══════════════════════════════════════════
+       SECCIÓN 3 — LÍNEAS DE TRABAJO
+    ═══════════════════════════════════════════ */
+    .lines-section {
+      background: var(--st-off-white);
+      padding: var(--section-py) 0;
+    }
+
+    .lines-header {
+      max-width: 680px;
+      margin-bottom: 52px;
+    }
+
+    .lines-subtext {
+      font-family: var(--font-body);
+      font-size: 0.97rem;
+      color: var(--st-text-soft);
+      line-height: 1.75;
+      margin-top: 16px;
+    }
+
+    .lines-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .line-card {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(40,70,57,0.1);
+      background: var(--st-white);
+      transition: transform 0.25s, box-shadow 0.25s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .line-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(40,70,57,0.12);
+    }
+
+    .line-card-header {
+      padding: 32px 28px 28px;
+      position: relative;
+    }
+
+    .line-prod  { background: linear-gradient(135deg, #284639 0%, #1e3a2d 100%); }
+    .line-salud { background: linear-gradient(135deg, #1a4a3a 0%, #0f3328 100%); }
+    .line-innov { background: linear-gradient(135deg, #1e3d2f 0%, #284639 100%); }
+
+    .line-num {
+      font-family: var(--font-title);
+      font-weight: 900;
+      font-size: 3.5rem;
+      line-height: 1;
+      color: rgba(255,255,255,0.1);
+      position: absolute;
+      top: 16px;
+      right: 24px;
+      letter-spacing: -2px;
+    }
+
+    .line-card-title-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .line-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    .line-card-header h3 {
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: white;
+      line-height: 1.2;
+    }
+
+    .line-tagline {
+      font-family: var(--font-body);
+      font-size: 0.83rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.55;
+    }
+
+    /* Franja verde vivo como acento inferior del header */
+    .line-card-header::after {
+      content: '';
+      display: block;
+      height: 3px;
+      background: var(--st-green-vivid);
+      margin-top: 22px;
+      border-radius: 2px;
+      width: 40px;
+    }
+
+    .line-card-body {
+      padding: 24px 28px 28px;
+      flex: 1;
+    }
+
+    .line-topics {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .line-topics li {
+      font-family: var(--font-body);
+      font-size: 0.86rem;
+      color: var(--st-text-soft);
+      line-height: 1.4;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .line-topics li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--st-green-vivid);
+    }
+
+    /* Nota integradora */
+    .lines-note {
+      margin-top: 40px;
+      background: var(--st-pastel);
+      border: 1px solid rgba(40,70,57,0.12);
+      border-left: 4px solid var(--st-green-vivid);
+      border-radius: 10px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .lines-note-icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .lines-note p {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--st-text-soft);
+      line-height: 1.65;
+    }
+
+    @media (max-width: 900px) {
+      .lines-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ═══════════════════════════════════════════
+       SECCIÓN 4 — CATÁLOGO
+    ═══════════════════════════════════════════ */
+    .catalog-section {
+      background: var(--st-white);
+      padding: var(--section-py) 0;
+    }
+
+    .catalog-header {
+      max-width: 640px;
+      margin-bottom: 52px;
+    }
+
+    .catalog-subtext {
+      font-family: var(--font-body);
+      font-size: 0.97rem;
+      color: var(--st-text-soft);
+      line-height: 1.75;
+      margin-top: 14px;
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .catalog-card {
+      background: var(--st-pastel);
+      border-radius: 14px;
+      border: 1px solid rgba(40,70,57,0.09);
+      padding: 28px 24px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      transition: transform 0.22s, box-shadow 0.22s;
+      position: relative;
+    }
+
+    .catalog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 36px rgba(40,70,57,0.11);
+    }
+
+    .catalog-card--featured {
+      background: var(--st-off-white);
+      border-color: var(--st-green);
+      border-width: 1.5px;
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: -12px;
+      left: 24px;
+      background: var(--st-green-vivid);
+      color: white;
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .catalog-card-top {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .catalog-tag {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 4px;
+      width: fit-content;
+    }
+
+    .tag-programa { background: #D1E8DC; color: #1a4a30; }
+    .tag-plan     { background: #C8E6D4; color: #15402a; }
+    .tag-diploma  { background: #D8EDE3; color: #1e4d35; }
+    .tag-eval     { background: #E2F0E8; color: #284639; }
+    .tag-coaching { background: #CBE8D8; color: #174030; }
+
+    .catalog-card h3 {
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--st-green);
+      line-height: 1.25;
+    }
+
+    .catalog-card p {
+      font-family: var(--font-body);
+      font-size: 0.86rem;
+      color: var(--st-text-soft);
+      line-height: 1.65;
+    }
+
+    .catalog-card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .meta-pill {
+      background: rgba(40,70,57,0.07);
+      border-radius: 20px;
+      padding: 4px 10px;
+      font-family: var(--font-body);
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--st-green);
+    }
+
+    .catalog-cta {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--st-green-vivid);
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+      display: inline-block;
+      padding-top: 4px;
+      border-top: 1px solid rgba(40,70,57,0.1);
+    }
+
+    .catalog-cta:hover { color: var(--st-green-vivid-dark); }
+
+    .catalog-footer {
+      margin-top: 48px;
+      background: var(--st-green);
+      border-radius: 14px;
+      padding: 36px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .catalog-footer p {
+      font-family: var(--font-title);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.88);
+      max-width: 500px;
+      line-height: 1.5;
+    }
+
+    .catalog-footer .btn-primary {
+      background: var(--st-green-vivid);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .catalog-footer .btn-primary:hover {
+      background: var(--st-green-vivid-dark);
+    }
+
+    @media (max-width: 1000px) {
+      .catalog-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .catalog-grid { grid-template-columns: 1fr; }
+      .catalog-footer { flex-direction: column; text-align: center; }
+    }
+
+    /* ═══════════════════════════════════════════
+       SECCIÓN 5 — METODOLOGÍA
+    ═══════════════════════════════════════════ */
+    .method-section {
+      background: var(--st-off-white);
+      padding: var(--section-py) 0;
+    }
+
+    .method-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .method-rule {
+      width: 48px;
+      height: 3px;
+      background: var(--st-green-vivid);
+      border-radius: 2px;
+      margin: 20px 0 22px;
+    }
+
+    .method-intro {
+      font-family: var(--font-body);
+      font-size: 0.97rem;
+      color: var(--st-text-soft);
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+
+    .method-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .method-step {
+      display: flex;
+      gap: 18px;
+      padding-bottom: 28px;
+      position: relative;
+    }
+
+    /* Línea vertical conectora */
+    .method-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 16px;
+      top: 36px;
+      bottom: 0;
+      width: 2px;
+      background: var(--st-gray-light);
+    }
+
+    .step-dot {
+      width: 34px;
+      height: 34px;
+      min-width: 34px;
+      background: var(--st-green);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.85rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-content h4 {
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--st-green);
+      margin-bottom: 6px;
+      padding-top: 5px;
+    }
+
+    .step-content p {
+      font-family: var(--font-body);
+      font-size: 0.86rem;
+      color: var(--st-text-soft);
+      line-height: 1.65;
+    }
+
+    /* Panel derecho */
+    .method-panel {
+      background: var(--st-green);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .method-panel-header {
+      padding: 22px 28px 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .method-panel-label {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--st-green-vivid);
+    }
+
+    .method-reasons {
+      padding: 8px 0;
+    }
+
+    .method-reason {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 18px 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      transition: background 0.2s;
+    }
+
+    .method-reason:last-child { border-bottom: none; }
+    .method-reason:hover { background: rgba(255,255,255,0.04); }
+
+    .reason-icon {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .reason-text {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .reason-text strong {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: white;
+    }
+
+    .reason-text span {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.5;
+    }
+
+    .method-panel-footer {
+      padding: 22px 28px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.12);
+    }
+
+    .method-stat-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .method-mini-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      flex: 1;
+    }
+
+    .mini-num {
+      font-family: var(--font-title);
+      font-weight: 900;
+      font-size: 1.6rem;
+      color: white;
+      line-height: 1;
+    }
+
+    .mini-label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.55);
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .method-mini-divider {
+      width: 1px;
+      height: 32px;
+      background: rgba(255,255,255,0.15);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 900px) {
+      .method-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    /* ═══════════════════════════════════════════
+       BLOQUE TECNOLÓGICO (dentro de metodología)
+    ═══════════════════════════════════════════ */
+    .tech-block {
+      margin-top: 72px;
+      background: var(--st-green);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .tech-block-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      padding: 48px 48px 36px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .tech-title {
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+      color: white;
+      line-height: 1.2;
+      margin-top: 10px;
+    }
+
+    .tech-header-right p {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.68);
+      line-height: 1.75;
+      padding-top: 36px;
+    }
+
+    .tech-pillars {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .tech-pillar {
+      padding: 32px 28px;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .tech-pillar:last-child { border-right: none; }
+
+    .tech-pillar-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .tech-pillar h4 {
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: white;
+      line-height: 1.3;
+    }
+
+    .tech-pillar p {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .tech-tag {
+      display: inline-block;
+      background: rgba(13,177,75,0.2);
+      border: 1px solid rgba(13,177,75,0.35);
+      border-radius: 4px;
+      padding: 3px 9px;
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #6ee89a;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+      width: fit-content;
+    }
+
+    .tech-footer-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 24px 48px;
+      background: rgba(0,0,0,0.18);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .tech-strip-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      text-align: center;
+    }
+
+    .tech-strip-item strong {
+      font-family: var(--font-title);
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: white;
+      line-height: 1;
+    }
+
+    .tech-strip-item span {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .tech-strip-sep {
+      width: 1px;
+      height: 32px;
+      background: rgba(255,255,255,0.15);
+    }
+
+    @media (max-width: 1000px) {
+      .tech-pillars { grid-template-columns: repeat(2, 1fr); }
+      .tech-block-header { grid-template-columns: 1fr; gap: 16px; }
+      .tech-header-right p { padding-top: 0; }
+    }
+
+    @media (max-width: 600px) {
+      .tech-pillars { grid-template-columns: 1fr; }
+      .tech-block-header { padding: 32px 24px 24px; }
+      .tech-pillar { padding: 24px; }
+      .tech-footer-strip { padding: 20px 24px; }
+      .tech-strip-sep { display: none; }
+    }
+
+    /* ═══════════════════════════════════════════
+       SECCIÓN 6 — DIFERENCIADORES
+    ═══════════════════════════════════════════ */
+    .diff-section {
+      background: var(--st-white);
+      padding: var(--section-py) 0;
+    }
+
+    .diff-header {
+      max-width: 680px;
+      margin-bottom: 52px;
+    }
+
+    .diff-subtext {
+      font-family: var(--font-body);
+      font-size: 0.97rem;
+      color: var(--st-text-soft);
+      line-height: 1.75;
+      margin-top: 14px;
+    }
+
+    .diff-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .diff-card {
+      background: var(--st-pastel);
+      border-radius: 12px;
+      border: 1px solid rgba(40,70,57,0.08);
+      padding: 26px 22px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.22s, box-shadow 0.22s;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .diff-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(40,70,57,0.1);
+    }
+
+    .diff-card-num {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      font-family: var(--font-title);
+      font-weight: 900;
+      font-size: 2rem;
+      color: rgba(40,70,57,0.07);
+      line-height: 1;
+    }
+
+    .diff-icon-wrap {
+      font-size: 1.5rem;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+
+    .diff-card h4 {
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: 0.98rem;
+      color: var(--st-green);
+      line-height: 1.25;
+    }
+
+    .diff-card p {
+      font-family: var(--font-body);
+      font-size: 0.83rem;
+      color: var(--st-text-soft);
+      line-height: 1.6;
+    }
+
+    /* Acento verde vivo en la card al hover */
+    .diff-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--st-green-vivid);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease-out;
+    }
+
+    .diff-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    @media (max-width: 1000px) {
+      .diff-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .diff-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ═══════════════════════════════════════════
+       SECCIÓN 7 — SEGMENTOS
+    ═══════════════════════════════════════════ */
+    .segments-section {
+      background: var(--st-off-white);
+      padding: var(--section-py) 0;
+    }
+
+    .segments-header {
+      max-width: 680px;
+      margin-bottom: 40px;
+    }
+
+    .segments-subtext {
+      font-family: var(--font-body);
+      font-size: 0.97rem;
+      color: var(--st-text-soft);
+      line-height: 1.75;
+      margin-top: 14px;
+    }
+
+    .seg-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .seg-tab {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--st-text-soft);
+      background: var(--st-white);
+      border: 1.5px solid var(--st-gray-light);
+      border-radius: 8px;
+      padding: 10px 22px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .seg-tab:hover {
+      border-color: var(--st-green);
+      color: var(--st-green);
+    }
+
+    .seg-tab.active {
+      background: var(--st-green);
+      border-color: var(--st-green);
+      color: white;
+    }
+
+    .seg-panel {
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: start;
+      background: var(--st-white);
+      border-radius: 16px;
+      padding: 44px 48px;
+      border: 1px solid rgba(40,70,57,0.09);
+    }
+
+    .seg-panel.active {
+      display: grid;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .seg-context-label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--st-green-vivid);
+      margin-bottom: 10px;
+    }
+
+    .seg-left h3 {
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: var(--st-green);
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+
+    .seg-left p {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      color: var(--st-text-soft);
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+
+    .seg-needs {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .seg-need {
+      font-family: var(--font-body);
+      font-size: 0.86rem;
+      color: var(--st-text);
+      font-weight: 500;
+      padding: 8px 14px;
+      background: var(--st-pastel);
+      border-radius: 6px;
+      border-left: 3px solid var(--st-green-vivid);
+    }
+
+    .seg-offer-label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--st-green);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--st-gray-light);
+    }
+
+    .seg-offer-items {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .seg-offer-item {
+      background: var(--st-pastel);
+      border-radius: 8px;
+      padding: 14px 16px;
+      border: 1px solid rgba(40,70,57,0.08);
+    }
+
+    .seg-offer-name {
+      font-family: var(--font-title);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--st-green);
+      margin-bottom: 4px;
+    }
+
+    .seg-offer-desc {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: var(--st-text-soft);
+      line-height: 1.4;
+    }
+
+    @media (max-width: 900px) {
+      .seg-panel.active { grid-template-columns: 1fr; gap: 32px; }
+      .seg-panel { padding: 28px 24px; }
+    }
+
+    /* ═══════════════════════════════════════════
+       SECCIÓN 8 — CONTACTO
+    ═══════════════════════════════════════════ */
+    .contact-section {
+      background: var(--st-green);
+      padding: var(--section-py) 0;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .contact-intro {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: rgba(255,255,255,0.68);
+      line-height: 1.8;
+      margin-bottom: 36px;
+      max-width: 440px;
+    }
+
+    .contact-items {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .contact-item-icon {
+      font-size: 1.3rem;
+      width: 42px;
+      height: 42px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-item-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .contact-item-text span {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.45);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    .contact-item-text strong {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.9);
+      font-weight: 600;
+    }
+
+    .contact-card {
+      background: var(--st-pastel);
+      border-radius: 16px;
+      padding: 40px 36px;
+      border: 1px solid rgba(40,70,57,0.15);
+    }
+
+    .contact-card h3 {
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: var(--st-green);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .contact-card p {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--st-text-soft);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .contact-btn-main {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--st-green);
+      color: white;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 15px 28px;
+      border-radius: 8px;
+      width: 100%;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .contact-btn-main:hover { background: var(--st-green-mid); }
+
+    .contact-certstrips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(40,70,57,0.1);
+    }
+
+    .contact-certstrips span {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--st-green);
+      background: rgba(40,70,57,0.07);
+      border-radius: 20px;
+      padding: 4px 10px;
+    }
+
+    @media (max-width: 900px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════ */
+    .site-footer {
+      background: #0d1f16;
+      padding: 28px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-brand-line {
+      width: 3px;
+      height: 28px;
+      background: var(--st-green-vivid);
+      border-radius: 2px;
+    }
+
+    .footer-brand strong {
+      display: block;
+      font-family: var(--font-title);
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: white;
+    }
+
+    .footer-brand span {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.45);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+    .footer-copy {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        padding: 72px 24px 60px;
+        gap: 40px;
+      }
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+    }
+
+    @media (max-width: 600px) {
+      .stats-strip-inner { justify-content: center; }
+      .strip-divider { display: none; }
+      .hero-headline { font-size: 2.2rem; }
+      .container { padding: 0 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     NAVIGATION
+══════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <div class="nav-brand-line"></div>
+      <div class="nav-brand-text">
+        <strong>Centro de Liderazgo STEC</strong>
+        <span>Santo Tomás Educación Continua</span>
+      </div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#metodologia">Metodología</a></li>
+      <li><a href="#segmentos">Segmentos</a></li>
+      <li><a href="#contacto" class="nav-cta">Solicitar propuesta</a></li>
+    </ul>
+
+    <button class="nav-toggle" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-blob"></div>
+  <div class="hero-accent-line"></div>
+
+  <div class="hero-inner">
+
+    <!-- Copy principal -->
+    <div class="hero-copy fade-up">
+      <div class="hero-eyebrow">Formación de Liderazgo · Presencia en todo Chile</div>
+
+      <h1 class="hero-headline">
+        Líderes formados con<br>
+        <em>estándar académico global</em>
+      </h1>
+
+      <div class="hero-rule"></div>
+
+      <p class="hero-sub">
+        Programas construidos con <strong>rigor académico de nivel mundial</strong>
+        y entregados por equipos estables con presencia en todo Chile.<br><br>
+        Formamos mandos medios que resuelven los problemas reales del día a día:
+        productividad, bienestar organizacional e innovación.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#contacto" class="btn-primary">
+          Solicitar propuesta
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#servicios" class="btn-secondary">Ver catálogo de servicios</a>
+      </div>
+    </div>
+
+    <!-- Card lateral — credenciales institucionales -->
+    <div class="hero-card fade-up" style="transition-delay: 0.18s;">
+      <div class="hero-card-title">Respaldo institucional</div>
+
+      <div class="hero-card-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">30+</div>
+          <div class="hero-stat-desc">Años de trayectoria formando líderes en Chile</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">PhD</div>
+          <div class="hero-stat-desc">Docentes investigadores activos con grado de Doctor</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">3</div>
+          <div class="hero-stat-desc">Líneas de especialidad: Productividad, Salud Mental e Innovación</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">ISO</div>
+          <div class="hero-stat-desc">Procesos certificados bajo estándares internacionales de calidad</div>
+        </div>
+      </div>
+
+      <div class="hero-card-cert">
+        <span class="cert-tag">SENCE</span>
+        <span class="cert-tag">Chilevalora</span>
+        <span class="cert-tag light">Cert. académica</span>
+        <span class="cert-tag light">Cobertura nacional</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     STATS STRIP
+══════════════════════════════════════ -->
+<div class="stats-strip">
+  <div class="stats-strip-inner">
+    <div class="strip-stat">
+      <div class="strip-stat-num">30+</div>
+      <div class="strip-stat-text">Años de trayectoria institucional</div>
+    </div>
+    <div class="strip-divider"></div>
+    <div class="strip-stat">
+      <div class="strip-stat-num">PhD</div>
+      <div class="strip-stat-text">Docentes con grado académico</div>
+    </div>
+    <div class="strip-divider"></div>
+    <div class="strip-stat">
+      <div class="strip-stat-num">ISO</div>
+      <div class="strip-stat-text">Gestión certificada bajo norma internacional</div>
+    </div>
+    <div class="strip-divider"></div>
+    <div class="strip-stat">
+      <div class="strip-stat-num">Todo</div>
+      <div class="strip-stat-text">Chile — red nacional de sedes operativas</div>
+    </div>
+    <div class="strip-divider"></div>
+    <div class="strip-stat">
+      <div class="strip-stat-num">SENCE</div>
+      <div class="strip-stat-text">Franquicia tributaria disponible</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN 2 — EL DESAFÍO
+══════════════════════════════════════ -->
+<section class="challenge-section">
+  <div class="container">
+
+    <div class="challenge-top fade-up">
+      <div class="section-label">El problema que nadie resuelve bien</div>
+      <div class="challenge-top-grid">
+        <h2 class="section-title">
+          El mando medio carga con todo<br>
+          y casi nadie lo prepara para eso
+        </h2>
+        <p class="challenge-intro">
+          En Chile, los jefes intermedios son el eslabón más exigido y menos formado de
+          cualquier organización. Responden ante gerentes exigentes, lideran equipos con
+          bajo compromiso y operan en contextos de alta precariedad. Sin las herramientas
+          adecuadas, el resultado es predecible: tensión, rotación y resultados que no llegan.
+        </p>
+      </div>
+    </div>
+
+    <div class="challenge-grid">
+
+      <div class="challenge-card fade-up" style="transition-delay:0.05s">
+        <div class="challenge-icon">⬆️</div>
+        <h3>Presión desde arriba</h3>
+        <p>Gerencias con metas crecientes, cambios de prioridad constantes y poca tolerancia al error. El jefe intermedio absorbe la exigencia sin amortiguación.</p>
+      </div>
+
+      <div class="challenge-card fade-up" style="transition-delay:0.1s">
+        <div class="challenge-icon">⬇️</div>
+        <h3>Tensión desde abajo</h3>
+        <p>Equipos con bajo compromiso, brechas generacionales, alta rotación y demandas de bienestar que los líderes no saben cómo gestionar.</p>
+      </div>
+
+      <div class="challenge-card fade-up" style="transition-delay:0.15s">
+        <div class="challenge-icon">🔄</div>
+        <h3>Cambio sin acompañamiento</h3>
+        <p>Digitalización acelerada, nuevas normativas como la Ley Karin y adopción de IA — transformaciones que llegan sin tiempo ni soporte para adaptarse.</p>
+      </div>
+
+      <div class="challenge-card fade-up" style="transition-delay:0.2s">
+        <div class="challenge-icon">🧠</div>
+        <h3>Autoestima y autoeficacia dañadas</h3>
+        <p>Muchos líderes intermedios cargan con un historial de sacrificio y escasez de recursos. Lo que necesitan no es más teoría: es un acompañamiento genuino.</p>
+      </div>
+
+      <div class="challenge-card fade-up" style="transition-delay:0.25s">
+        <div class="challenge-icon">📋</div>
+        <h3>Formación que no conecta</h3>
+        <p>Los programas genéricos hablan de liderazgo en abstracto. El mando medio necesita mensajes simples, breves y directamente conectados con su trabajo diario.</p>
+      </div>
+
+      <div class="challenge-card challenge-card--highlight fade-up" style="transition-delay:0.3s">
+        <div class="challenge-highlight-text">
+          <p>"Las organizaciones invierten en sus ejecutivos y en sus operarios. El mando medio — quien conecta a ambos — queda en el medio de nadie."</p>
+        </div>
+        <div class="challenge-highlight-cta">
+          <a href="#servicios" class="btn-outline-green">Ver cómo lo resolvemos →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN 3 — LÍNEAS DE TRABAJO
+══════════════════════════════════════ -->
+<section class="lines-section" id="servicios">
+  <div class="container">
+
+    <div class="lines-header fade-up">
+      <div class="section-label">Áreas de especialidad</div>
+      <h2 class="section-title">Tres líneas integradas.<br>Un sistema completo de desarrollo.</h2>
+      <p class="lines-subtext">
+        Cada línea responde a una dimensión crítica del liderazgo en organizaciones chilenas.
+        Pueden contratarse de forma independiente o como sistema integrado según las
+        necesidades de su organización.
+      </p>
+    </div>
+
+    <div class="lines-grid">
+
+      <!-- LÍNEA 1: PRODUCTIVIDAD -->
+      <div class="line-card fade-up" style="transition-delay:0.05s">
+        <div class="line-card-header line-prod">
+          <div class="line-num">01</div>
+          <div class="line-card-title-group">
+            <div class="line-icon">🚀</div>
+            <h3>Productividad</h3>
+          </div>
+          <p class="line-tagline">Claridad de roles, estructuras que funcionan y líderes que comprometen</p>
+        </div>
+        <div class="line-card-body">
+          <ul class="line-topics">
+            <li>Análisis de puestos y diseño de cargos</li>
+            <li>Estructuras organizativas eficientes</li>
+            <li>Evaluación del desempeño</li>
+            <li>Claridad de roles e incentivos</li>
+            <li>Liderazgo y compromiso organizacional</li>
+            <li>Gestión del conocimiento</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- LÍNEA 2: SALUD MENTAL -->
+      <div class="line-card fade-up" style="transition-delay:0.12s">
+        <div class="line-card-header line-salud">
+          <div class="line-num">02</div>
+          <div class="line-card-title-group">
+            <div class="line-icon">🧠</div>
+            <h3>Salud Mental Organizacional</h3>
+          </div>
+          <p class="line-tagline">Bienestar real que reduce conflictos y retiene a las personas clave</p>
+        </div>
+        <div class="line-card-body">
+          <ul class="line-topics">
+            <li>Regulación emocional y gestión del estrés</li>
+            <li>Burnout, identidad laboral y autoestima</li>
+            <li>Ley Karin y riesgos psicosociales</li>
+            <li>Gestión de conflictos y negociación</li>
+            <li>Diversidad intergeneracional</li>
+            <li>Conciliación trabajo-familia</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- LÍNEA 3: INNOVACIÓN -->
+      <div class="line-card fade-up" style="transition-delay:0.2s">
+        <div class="line-card-header line-innov">
+          <div class="line-num">03</div>
+          <div class="line-card-title-group">
+            <div class="line-icon">⚡</div>
+            <h3>Innovación y Digitalización</h3>
+          </div>
+          <p class="line-tagline">Líderes que adoptan la IA y la digitalización sin perder el equipo en el camino</p>
+        </div>
+        <div class="line-card-body">
+          <ul class="line-topics">
+            <li>Adopción acelerada de IA</li>
+            <li>Digitalización de procesos</li>
+            <li>Gobierno y protección de datos</li>
+            <li>Alineamiento estratégico de jefaturas</li>
+            <li>Modelos predictivos aplicados</li>
+            <li>Gestión de sistemas informativos</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Nota integradora -->
+    <div class="lines-note fade-up">
+      <div class="lines-note-icon">💡</div>
+      <p>Las tres líneas comparten un mismo marco metodológico basado en evidencia científica y pueden entregarse de forma modular, híbrida o como diploma cerrado de 120 horas in-company.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN 4 — CATÁLOGO DE SERVICIOS
+══════════════════════════════════════ -->
+<section class="catalog-section">
+  <div class="container">
+
+    <div class="catalog-header fade-up">
+      <div class="section-label">Catálogo de servicios</div>
+      <h2 class="section-title">Soluciones para cada necesidad<br>y presupuesto</h2>
+      <p class="catalog-subtext">Formatos flexibles diseñados para adaptarse a su organización. Todos los programas pueden financiarse mediante franquicia tributaria SENCE.</p>
+    </div>
+
+    <div class="catalog-grid">
+
+      <!-- 1 -->
+      <div class="catalog-card fade-up" style="transition-delay:0.05s">
+        <div class="catalog-card-top">
+          <span class="catalog-tag tag-programa">Programa</span>
+          <h3>Liderazgo efectivo para mandos medios</h3>
+          <p>Formación intensiva en formato híbrido diseñada para jefes intermedios que necesitan herramientas prácticas sin detener su operación. Contenido personalizado a la industria del cliente.</p>
+        </div>
+        <div class="catalog-card-meta">
+          <div class="meta-pill">🕐 30 horas</div>
+          <div class="meta-pill">💻 Híbrido</div>
+          <div class="meta-pill">📱 Móvil / Moodle</div>
+        </div>
+        <a href="#contacto" class="catalog-cta">Solicitar información →</a>
+      </div>
+
+      <!-- 2 -->
+      <div class="catalog-card catalog-card--featured fade-up" style="transition-delay:0.1s">
+        <div class="featured-badge">Más solicitado</div>
+        <div class="catalog-card-top">
+          <span class="catalog-tag tag-plan">Plan</span>
+          <h3>Plan de fortalecimiento de equipos</h3>
+          <p>Intervención de tres meses que combina diagnóstico de clima, formación modular y acompañamiento continuo. Incluye medición de impacto al cierre con indicadores acordados con la organización.</p>
+        </div>
+        <div class="catalog-card-meta">
+          <div class="meta-pill">📅 90 días</div>
+          <div class="meta-pill">👥 Equipos</div>
+          <div class="meta-pill">📊 Con medición</div>
+        </div>
+        <a href="#contacto" class="catalog-cta">Solicitar información →</a>
+      </div>
+
+      <!-- 3 -->
+      <div class="catalog-card fade-up" style="transition-delay:0.15s">
+        <div class="catalog-card-top">
+          <span class="catalog-tag tag-diploma">Diploma</span>
+          <h3>Diploma cerrado in-company</h3>
+          <p>Programa de alto impacto con diseño curricular a medida. Certificación académica institucional, docentes con grado de Doctor y metodología basada en evidencia científica internacional.</p>
+        </div>
+        <div class="catalog-card-meta">
+          <div class="meta-pill">🎓 120 horas</div>
+          <div class="meta-pill">🏢 In-company</div>
+          <div class="meta-pill">📜 Certificado UST</div>
+        </div>
+        <a href="#contacto" class="catalog-cta">Solicitar información →</a>
+      </div>
+
+      <!-- 4 -->
+      <div class="catalog-card fade-up" style="transition-delay:0.2s">
+        <div class="catalog-card-top">
+          <span class="catalog-tag tag-eval">Evaluación</span>
+          <h3>Evaluación de perfiles de liderazgo</h3>
+          <p>Diagnóstico individual o grupal de competencias con informe ejecutivo y plan de desarrollo personalizado. Herramienta clave para procesos de selección interna, promoción y sucesión.</p>
+        </div>
+        <div class="catalog-card-meta">
+          <div class="meta-pill">🔍 Individual o grupal</div>
+          <div class="meta-pill">📋 Informe ejecutivo</div>
+        </div>
+        <a href="#contacto" class="catalog-cta">Solicitar información →</a>
+      </div>
+
+      <!-- 5 -->
+      <div class="catalog-card fade-up" style="transition-delay:0.25s">
+        <div class="catalog-card-top">
+          <span class="catalog-tag tag-eval">Evaluación</span>
+          <h3>Evaluación de clima organizacional</h3>
+          <p>Medición del clima laboral con foco en las variables que predicen rendimiento, rotación y compromiso. Incluye informe con hallazgos clave y recomendaciones accionables para líderes.</p>
+        </div>
+        <div class="catalog-card-meta">
+          <div class="meta-pill">🌡️ Clima laboral</div>
+          <div class="meta-pill">💡 Recomendaciones</div>
+        </div>
+        <a href="#contacto" class="catalog-cta">Solicitar información →</a>
+      </div>
+
+      <!-- 6 -->
+      <div class="catalog-card fade-up" style="transition-delay:0.3s">
+        <div class="catalog-card-top">
+          <span class="catalog-tag tag-coaching">Coaching</span>
+          <h3>Acompañamiento y coaching ejecutivo</h3>
+          <p>Proceso personalizado de coaching orientado a resultados concretos de negocio. Sesiones individuales con consultor especializado en psicología organizacional y desarrollo de liderazgo.</p>
+        </div>
+        <div class="catalog-card-meta">
+          <div class="meta-pill">🤝 Individual</div>
+          <div class="meta-pill">🎯 Orientado a resultados</div>
+        </div>
+        <a href="#contacto" class="catalog-cta">Solicitar información →</a>
+      </div>
+
+    </div>
+
+    <!-- CTA final -->
+    <div class="catalog-footer fade-up">
+      <p>¿No encuentras el formato que necesitas? Diseñamos propuestas a medida para cada organización.</p>
+      <a href="#contacto" class="btn-primary">Conversar con un especialista</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN 5 — METODOLOGÍA
+══════════════════════════════════════ -->
+<section class="method-section" id="metodologia">
+  <div class="container">
+
+    <div class="method-grid">
+
+      <!-- Columna izquierda: texto -->
+      <div class="method-left fade-up">
+        <div class="section-label">Cómo lo hacemos</div>
+        <h2 class="section-title">Aprendizaje construido desde el trabajo real, no desde el aula</h2>
+        <div class="method-rule"></div>
+        <p class="method-intro">
+          No enseñamos liderazgo en abstracto. Nuestra metodología parte de los problemas concretos que el líder enfrenta hoy — y los convierte en el material pedagógico central del programa.
+        </p>
+
+        <div class="method-steps">
+
+          <div class="method-step">
+            <div class="step-dot">1</div>
+            <div class="step-content">
+              <h4>Diagnóstico de quiebres operacionales</h4>
+              <p>Identificamos las situaciones críticas reales del líder: conflictos, decisiones difíciles, brechas de rendimiento. Eso — no un caso genérico — es el punto de partida del aprendizaje.</p>
+            </div>
+          </div>
+
+          <div class="method-step">
+            <div class="step-dot">2</div>
+            <div class="step-content">
+              <h4>Micro-cápsulas accesibles desde el celular</h4>
+              <p>Contenido breve, directo y disponible en cualquier momento vía Moodle o dispositivo móvil. El participante aprende en sus tiempos, sin detener operaciones.</p>
+            </div>
+          </div>
+
+          <div class="method-step">
+            <div class="step-dot">3</div>
+            <div class="step-content">
+              <h4>Ejemplos y casos de la propia organización</h4>
+              <p>Los reportes, tareas y situaciones reales del participante se usan como material pedagógico. El aprendizaje se siente propio, no transferido desde otro contexto.</p>
+            </div>
+          </div>
+
+          <div class="method-step">
+            <div class="step-dot">4</div>
+            <div class="step-content">
+              <h4>Marco teórico con estándar académico global</h4>
+              <p>Cada módulo se sustenta en investigación actualizada sobre liderazgo, psicología organizacional y comportamiento humano. Rigor científico aplicado a la realidad chilena.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Columna derecha: panel visual -->
+      <div class="method-right fade-up" style="transition-delay:0.18s">
+
+        <div class="method-panel">
+          <div class="method-panel-header">
+            <span class="method-panel-label">¿Por qué funciona con mandos medios?</span>
+          </div>
+
+          <div class="method-reasons">
+            <div class="method-reason">
+              <div class="reason-icon">🎯</div>
+              <div class="reason-text">
+                <strong>Conecta con el día a día</strong>
+                <span>Mensajes simples y directos. Sin teoría que no tenga aplicación inmediata.</span>
+              </div>
+            </div>
+            <div class="method-reason">
+              <div class="reason-icon">💪</div>
+              <div class="reason-text">
+                <strong>Eleva autoeficacia</strong>
+                <span>Acompañamiento genuino que refuerza la confianza del líder en su propio criterio.</span>
+              </div>
+            </div>
+            <div class="method-reason">
+              <div class="reason-icon">⚡</div>
+              <div class="reason-text">
+                <strong>Reduce tensión operativa</strong>
+                <span>Herramientas concretas para lidiar con gerentes exigentes, proveedores y equipos diversos.</span>
+              </div>
+            </div>
+            <div class="method-reason">
+              <div class="reason-icon">📱</div>
+              <div class="reason-text">
+                <strong>Cabe en cualquier agenda</strong>
+                <span>Formato híbrido y asincrónico. El participante aprende cuando puede, desde donde esté.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="method-panel-footer">
+            <div class="method-stat-row">
+              <div class="method-mini-stat">
+                <span class="mini-num">25h</span>
+                <span class="mini-label">asincrónicas a tu ritmo</span>
+              </div>
+              <div class="method-mini-divider"></div>
+              <div class="method-mini-stat">
+                <span class="mini-num">5h</span>
+                <span class="mini-label">sincrónicas en vivo</span>
+              </div>
+              <div class="method-mini-divider"></div>
+              <div class="method-mini-stat">
+                <span class="mini-num">100%</span>
+                <span class="mini-label">casos reales de la org.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BLOQUE TECNOLÓGICO -->
+    <div class="tech-block fade-up">
+
+      <div class="tech-block-header">
+        <div class="tech-header-left">
+          <div class="section-label" style="color:var(--st-green-vivid)">Infraestructura tecnológica</div>
+          <h3 class="tech-title">Una plataforma de aprendizaje de nivel enterprise.<br>Probada en más de 30 programas.</h3>
+        </div>
+        <div class="tech-header-right">
+          <p>El Centro de Liderazgo STEC opera con una arquitectura tecnológica que integra agentes automatizados, modelos de lenguaje avanzados e inteligencia artificial para ofrecer lo que ningún programa tradicional puede: retroalimentación personalizada a escala y monitoreo del aprendizaje en tiempo real.</p>
+        </div>
+      </div>
+
+      <div class="tech-pillars">
+
+        <div class="tech-pillar">
+          <div class="tech-pillar-icon">📝</div>
+          <h4>Evaluación basada en contexto real</h4>
+          <p>Cada evaluación usa análisis de casos, preguntas abiertas y ejercicios aplicados al contexto real de la organización del participante.</p>
+          <div class="tech-tag">Evaluación formativa</div>
+        </div>
+
+        <div class="tech-pillar">
+          <div class="tech-pillar-icon">🤖</div>
+          <h4>Retroalimentación personalizada con IA</h4>
+          <p>Agentes automatizados en n8n + modelos de lenguaje en Vertex AI generan comentarios específicos para cada respuesta. La tecnología amplía la capacidad docente sin reemplazarla.</p>
+          <div class="tech-tag">n8n · Vertex AI · LLMs</div>
+        </div>
+
+        <div class="tech-pillar">
+          <div class="tech-pillar-icon">📊</div>
+          <h4>Analytics de aprendizaje en tiempo real</h4>
+          <p>Paneles dinámicos en Looker Studio muestran participación por módulo, tasas de avance, interacciones con contenidos y patrones de abandono. El cliente ve el progreso de su equipo en vivo.</p>
+          <div class="tech-tag">Looker Studio · LMS</div>
+        </div>
+
+        <div class="tech-pillar">
+          <div class="tech-pillar-icon">🎯</div>
+          <h4>Acompañamiento oportuno y basado en datos</h4>
+          <p>El equipo académico detecta tempranamente dificultades y contacta a participantes con menor actividad antes de que abandonen. Retención activa, no reactiva.</p>
+          <div class="tech-tag">Monitoreo permanente</div>
+        </div>
+
+      </div>
+
+      <div class="tech-footer-strip">
+        <div class="tech-strip-item">
+          <strong>30+</strong>
+          <span>programas con esta arquitectura</span>
+        </div>
+        <div class="tech-strip-sep"></div>
+        <div class="tech-strip-item">
+          <strong>n8n + Vertex AI</strong>
+          <span>stack de agentes e IA generativa</span>
+        </div>
+        <div class="tech-strip-sep"></div>
+        <div class="tech-strip-item">
+          <strong>Looker Studio</strong>
+          <span>dashboards en tiempo real para el cliente</span>
+        </div>
+        <div class="tech-strip-sep"></div>
+        <div class="tech-strip-item">
+          <strong>100%</strong>
+          <span>retroalimentación personalizada por participante</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN 6 — DIFERENCIADORES
+══════════════════════════════════════ -->
+<section class="diff-section">
+  <div class="container">
+
+    <div class="diff-header fade-up">
+      <div class="section-label">Por qué elegirnos</div>
+      <h2 class="section-title">Ventajas que ningún otro<br>programa combina</h2>
+      <p class="diff-subtext">No competimos por precio. Competimos por resultado. Estas son las razones concretas por las que organizaciones en todo Chile confían en el Centro de Liderazgo STEC.</p>
+    </div>
+
+    <div class="diff-grid">
+
+      <div class="diff-card fade-up" style="transition-delay:0.04s">
+        <div class="diff-card-num">01</div>
+        <div class="diff-icon-wrap">🎓</div>
+        <h4>Rigor académico con estándar global</h4>
+        <p>Programas diseñados y ejecutados por académicos con grado de Doctor, investigadores activos que traen evidencia científica actualizada a cada módulo.</p>
+      </div>
+
+      <div class="diff-card fade-up" style="transition-delay:0.08s">
+        <div class="diff-card-num">02</div>
+        <div class="diff-icon-wrap">📍</div>
+        <h4>Presencia en todo Chile</h4>
+        <p>Red de sedes operativas a lo largo del país. Capacidad real para implementar programas en cualquier región, con equipos estables y conocimiento del contexto local.</p>
+      </div>
+
+      <div class="diff-card fade-up" style="transition-delay:0.12s">
+        <div class="diff-card-num">03</div>
+        <div class="diff-icon-wrap">💰</div>
+        <h4>Franquicia tributaria SENCE</h4>
+        <p>Todos nuestros programas son elegibles para franquicia SENCE, reduciendo significativamente el costo real para la empresa y agilizando la aprobación interna.</p>
+      </div>
+
+      <div class="diff-card fade-up" style="transition-delay:0.16s">
+        <div class="diff-card-num">04</div>
+        <div class="diff-icon-wrap">📜</div>
+        <h4>Certificación académica + Chilevalora</h4>
+        <p>Los participantes obtienen certificados que se pueden integrar con mallas académicas de Santo Tomás o bien con certificación Chilevalora. Sabemos que este segmento de participantes valora rutas académicas reconocidas por el Estado.</p>
+      </div>
+
+      <div class="diff-card fade-up" style="transition-delay:0.20s">
+        <div class="diff-card-num">05</div>
+        <div class="diff-icon-wrap">✅</div>
+        <h4>Procesos certificados ISO</h4>
+        <p>Gestión operativa bajo normas internacionales de calidad. Trazabilidad, cumplimiento y estándares de entrega que garantizan consistencia en cada programa.</p>
+      </div>
+
+      <div class="diff-card fade-up" style="transition-delay:0.24s">
+        <div class="diff-card-num">06</div>
+        <div class="diff-icon-wrap">🤖</div>
+        <h4>Tecnología de aprendizaje de nivel enterprise</h4>
+        <p>Plataforma propia con IA generativa, agentes automatizados y analytics en tiempo real. Probada en más de 30 programas. Estamos a la vanguardia. Lideramos la comisión de IA de RECLA Latam.</p>
+      </div>
+
+      <div class="diff-card fade-up" style="transition-delay:0.28s">
+        <div class="diff-card-num">07</div>
+        <div class="diff-icon-wrap">👥</div>
+        <h4>Equipos estables y 30 años de trayectoria</h4>
+        <p>No trabajamos con relatores freelance de paso. Nuestros equipos conocen el mercado chileno en profundidad y acumulan experiencia programa tras programa.</p>
+      </div>
+
+      <div class="diff-card fade-up" style="transition-delay:0.32s">
+        <div class="diff-card-num">08</div>
+        <div class="diff-icon-wrap">⚡</div>
+        <h4>Velocidad de implementación</h4>
+        <p>Capacidad operacional y financiera para responder con rapidez. Desde la propuesta hasta el inicio del programa, sin demoras que hagan perder la ventana de oportunidad.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN 7 — PARA TU ORGANIZACIÓN
+══════════════════════════════════════ -->
+<section class="segments-section" id="segmentos">
+  <div class="container">
+
+    <div class="segments-header fade-up">
+      <div class="section-label">Para tu organización</div>
+      <h2 class="section-title">Una propuesta diseñada<br>para tu contexto específico</h2>
+      <p class="segments-subtext">El mismo rigor académico, adaptado a las reglas del juego de cada sector. Selecciona tu tipo de organización.</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="seg-tabs fade-up">
+      <button class="seg-tab active" onclick="switchSeg('empresa', this)">🏢 Empresa privada</button>
+      <button class="seg-tab" onclick="switchSeg('publico', this)">🏛️ Sector público</button>
+      <button class="seg-tab" onclick="switchSeg('universidad', this)">🎓 Universidades</button>
+    </div>
+
+    <!-- Panel: Empresa privada -->
+    <div id="seg-empresa" class="seg-panel active fade-up">
+      <div class="seg-left">
+        <div class="seg-context-label">¿A quién va dirigido?</div>
+        <h3>Gerencias de Personas, RRHH y Desarrollo Organizacional</h3>
+        <p>Su organización necesita jefaturas intermedias que transformen la estrategia en resultados en el piso de trabajo. El problema no es la estrategia: es que quienes deben ejecutarla no siempre tienen las herramientas para hacerlo.</p>
+        <div class="seg-needs">
+          <div class="seg-need">→ Reducir rotación con líderes que retienen a sus equipos</div>
+          <div class="seg-need">→ Cumplir Ley Karin y normativas de bienestar laboral</div>
+          <div class="seg-need">→ Financiar formación con franquicia SENCE</div>
+          <div class="seg-need">→ Medir impacto real en KPIs del negocio</div>
+          <div class="seg-need">→ Preparar a sus líderes para la adopción de IA</div>
+        </div>
+      </div>
+      <div class="seg-right">
+        <div class="seg-offer-label">Oferta recomendada</div>
+        <div class="seg-offer-items">
+          <div class="seg-offer-item">
+            <div class="seg-offer-name">Programa Liderazgo Efectivo · 30 horas</div>
+            <div class="seg-offer-desc">Híbrido, franquicia SENCE, personalizado por industria</div>
+          </div>
+          <div class="seg-offer-item">
+            <div class="seg-offer-name">Plan de Fortalecimiento de Equipos · 90 días</div>
+            <div class="seg-offer-desc">Diagnóstico + formación + medición de resultados con analytics</div>
+          </div>
+          <div class="seg-offer-item">
+            <div class="seg-offer-name">Evaluación de Perfiles de Liderazgo</div>
+            <div class="seg-offer-desc">Para selección interna, planes de sucesión y promoción</div>
+          </div>
+        </div>
+        <a href="#contacto" class="btn-primary" style="margin-top:20px; display:inline-flex; align-items:center; gap:8px;">
+          Solicitar propuesta para mi empresa
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Panel: Sector público -->
+    <div id="seg-publico" class="seg-panel">
+      <div class="seg-left">
+        <div class="seg-context-label">¿A quién va dirigido?</div>
+        <h3>Jefes de servicio, encargados de capacitación y organismos del Estado</h3>
+        <p>El sector público enfrenta presiones únicas: alta demanda ciudadana, recursos acotados, brechas generacionales y normativas crecientes. Formamos líderes que navegan este contexto con herramientas reales, no genéricas.</p>
+        <div class="seg-needs">
+          <div class="seg-need">→ Cumplir obligaciones de capacitación y PMG</div>
+          <div class="seg-need">→ Abordar Ley Karin y prevención de riesgos psicosociales</div>
+          <div class="seg-need">→ Fortalecer liderazgo bajo alta exigencia ciudadana</div>
+          <div class="seg-need">→ Obtener certificación Chilevalora reconocida por el Estado</div>
+          <div class="seg-need">→ Incorporar analítica de aprendizaje como evidencia de impacto</div>
+        </div>
+      </div>
+      <div class="seg-right">
+        <div class="seg-offer-label">Oferta recomendada</div>
+        <div class="seg-offer-items">
+          <div class="seg-offer-item">
+            <div class="seg-offer-name">Programa Salud Mental Organizacional</div>
+            <div class="seg-offer-desc">Ley Karin, riesgos psicosociales, bienestar y liderazgo en contexto público</div>
+          </div>
+          <div class="seg-offer-item">
+            <div class="seg-offer-name">Diploma Cerrado In-Agency · 120 horas</div>
+            <div class="seg-offer-desc">Con certificación Chilevalora y analítica de aprendizaje incluida</div>
+          </div>
+          <div class="seg-offer-item">
+            <div class="seg-offer-name">Evaluación de Clima Organizacional</div>
+            <div class="seg-offer-desc">Diagnóstico con recomendaciones ejecutivas para la dirección del servicio</div>
+          </div>
+        </div>
+        <a href="#contacto" class="btn-primary" style="margin-top:20px; display:inline-flex; align-items:center; gap:8px;">
+          Solicitar propuesta para mi institución
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Panel: Universidades -->
+    <div id="seg-universidad" class="seg-panel">
+      <div class="seg-left">
+        <div class="seg-context-label">¿A quién va dirigido?</div>
+        <h3>Unidades de educación continua, directores académicos y decanos</h3>
+        <p>El Centro de Liderazgo STEC puede operar como unidad de educación continua co-diseñada con su institución, aportando currículo probado, docentes investigadores, plataforma tecnológica propia y cobertura nacional.</p>
+        <div class="seg-needs">
+          <div class="seg-need">→ Ampliar oferta de educación continua sin aumentar dotación fija</div>
+          <div class="seg-need">→ Acceder a currículo actualizado con base científica</div>
+          <div class="seg-need">→ Aprovechar infraestructura tecnológica y sedes STEC en todo Chile</div>
+          <div class="seg-need">→ Co-certificar programas con respaldo de ambas instituciones</div>
+          <div class="seg-need">→ Acceder a paneles de analytics para reportar impacto formativo</div>
+        </div>
+      </div>
+      <div class="seg-right">
+        <div class="seg-offer-label">Modalidad de colaboración</div>
+        <div class="seg-offer-items">
+          <div class="seg-offer-item">
+            <div class="seg-offer-name">Co-diseño curricular</div>
+            <div class="seg-offer-desc">Integración con mallas IP/CFT y estándares académicos de su institución</div>
+          </div>
+          <div class="seg-offer-item">
+            <div class="seg-offer-name">Alianza de co-certificación</div>
+            <div class="seg-offer-desc">Certificado conjunto que potencia el valor percibido por el participante</div>
+          </div>
+          <div class="seg-offer-item">
+            <div class="seg-offer-name">Programa plug-and-play</div>
+            <div class="seg-offer-desc">Adopción de programas STEC con adaptación institucional y entrega tecnológica incluida</div>
+          </div>
+        </div>
+        <a href="#contacto" class="btn-primary" style="margin-top:20px; display:inline-flex; align-items:center; gap:8px;">
+          Explorar alianza estratégica
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN 8 — CONTACTO
+══════════════════════════════════════ -->
+<section class="contact-section" id="contacto">
+  <div class="container">
+
+    <div class="contact-grid">
+
+      <div class="contact-left fade-up">
+        <div class="section-label" style="color:rgba(255,255,255,0.6)">Hablemos</div>
+        <h2 class="section-title" style="color:white">¿Listos para desarrollar<br>a sus líderes?</h2>
+        <div class="method-rule"></div>
+        <p class="contact-intro">Cuéntenos los desafíos de su organización y diseñamos juntos la propuesta más adecuada para su equipo, contexto y presupuesto. Sin compromisos.</p>
+
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-item-icon">✉️</div>
+            <div class="contact-item-text">
+              <span>Email directo</span>
+              <strong>calbornozp@santotomas.cl</strong>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">🌐</div>
+            <div class="contact-item-text">
+              <span>Institución</span>
+              <strong>Santo Tomás Educación Continua</strong>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📍</div>
+            <div class="contact-item-text">
+              <span>Cobertura</span>
+              <strong>Presencia en todo Chile</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-right fade-up" style="transition-delay:0.15s">
+        <div class="contact-card">
+          <h3>Solicite una reunión sin costo</h3>
+          <p>En 30 minutos podemos mostrarle la plataforma, presentar un programa ajustado a su realidad y responder todas sus preguntas.</p>
+
+          <div class="contact-options">
+            <a href="mailto:calbornozp@santotomas.cl?subject=Solicito propuesta Centro de Liderazgo STEC" class="contact-btn-main">
+              Escribir ahora
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+
+          <div class="contact-certstrips">
+            <span>✓ ISO Certificado</span>
+            <span>✓ Franquicia SENCE</span>
+            <span>✓ Chilevalora</span>
+            <span>✓ 30+ años</span>
+            <span>✓ RECLA IA</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-brand-line"></div>
+        <div>
+          <strong>Centro de Liderazgo STEC</strong>
+          <span>Santo Tomás Educación Continua</span>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#servicios">Servicios</a>
+        <a href="#metodologia">Metodología</a>
+        <a href="#segmentos">Segmentos</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+      <div class="footer-copy">
+        © 2026 Santo Tomás · Centro de Liderazgo STEC · ISO · SENCE · Chilevalora
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════ -->
+<script>
+  // Sticky nav
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Intersection Observer — fade-up
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Segment tab switcher
+  function switchSeg(id, btn) {
+    document.querySelectorAll('.seg-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.seg-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('seg-' + id).classList.add('active');
+  }
+
+  // Mobile menu
+  function toggleMobileMenu() {
+    const nav = document.querySelector('.nav-links');
+    nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+  }
+</script>
+
+</body>
+</html>
